@@ -9,7 +9,6 @@ const HomeScreen = () => {
       style={{
         flex: 1,
         alignItems: "center",
-        paddingBottom: 110,
       }}
     >
       <Home />

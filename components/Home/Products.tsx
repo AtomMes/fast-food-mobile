@@ -7,26 +7,22 @@ interface Props {
 }
 
 const Products = ({ food }: Props) => {
-  const renderItem = ({ item }: { item: Item }) => <Product item={item} />;
 
   return (
     <View>
-      <FlatList
-        key={"_"}
-        data={food}
-        renderItem={renderItem}
-        numColumns={2}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
-        keyExtractor={(item) => item.id.toString()}
+      <View
         style={{
           display: "flex",
-        }}
-        contentContainerStyle={{
-          justifyContent: "space-between",
+          flexDirection: "row",
+          flexWrap: "wrap",
           alignItems: "center",
-          flexDirection: "column",
+          justifyContent: "space-between",
         }}
-      />
+      >
+        {food.map((item) => (
+          <Product key={item.id} item={item} />
+        ))}
+      </View>
     </View>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import HomeScreen from "../../screens/HomeScreen";
 import CartScreen from "../../screens/CartScreen";
@@ -9,15 +8,12 @@ import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 import { setItems } from "../../redux/itemsSlice";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { NavigationContainer, RouteProp } from "@react-navigation/native";
+import { NavigationContainer} from "@react-navigation/native";
 import {
   createNativeStackNavigator,
-  NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 import FullProduct from "../Home/FullProduct";
-
-
-
+import Header from "../Header";
 
 function Navigation() {
   const Tab = createBottomTabNavigator();
@@ -47,39 +43,39 @@ function Navigation() {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName = "";
+    <>
+      <NavigationContainer>
+        <Header />
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName = "";
 
-            if (route.name === "Home") {
-              iconName = "home";
-            } else if (route.name === "Cart") {
-              iconName = "shopping-cart";
-            } else if (route.name === "About") {
-              iconName = "info";
-            }
+              if (route.name === "Home") {
+                iconName = "home";
+              } else if (route.name === "Cart") {
+                iconName = "shopping-cart";
+              } 
 
-            return (
-              <Icon
-                name={iconName}
-                size={size}
-                color={focused ? "#35b8be" : "gray"}
-              />
-            );
-          },
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarActiveTintColor: "#35b8be",
-          tabBarInactiveTintColor: "gray",
-        })}
-      >
-        <Tab.Screen name="Home" component={ScreenNavigation} />
-        <Tab.Screen name="About" component={AboutUsScreen} />
-        <Tab.Screen name="Cart" component={CartScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+              return (
+                <Icon
+                  name={iconName}
+                  size={size}
+                  color={focused ? "#35b8be" : "gray"}
+                />
+              );
+            },
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: "#35b8be",
+            tabBarInactiveTintColor: "gray",
+          })}
+        >
+          <Tab.Screen name="Home" component={ScreenNavigation} />
+          <Tab.Screen name="Cart" component={CartScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 

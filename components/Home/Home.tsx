@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import Buttons from "./Buttons";
 import { useAppSelector } from "../../redux/redux-hooks";
@@ -71,9 +71,12 @@ const Home = () => {
  
 
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
+    <View style={{ flex: 1, alignItems: "center", paddingHorizontal:10 }}>
+      <ScrollView>
+
       <Buttons buttons={buttons} handleClick={handleClick} />
       <Products food={food} />
+      </ScrollView>
     
     </View>
   );
