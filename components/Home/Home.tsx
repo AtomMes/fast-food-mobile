@@ -68,10 +68,13 @@ const Home = () => {
     }
   }, [items]);
 
+ 
+
   return (
-    <View>
+    <View style={{ flex: 1, alignItems: "center" }}>
       <Buttons buttons={buttons} handleClick={handleClick} />
       <Products food={food} />
+    
     </View>
   );
 };

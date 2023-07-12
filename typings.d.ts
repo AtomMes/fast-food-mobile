@@ -17,3 +17,12 @@ type Item = {
 };
 
 type Items = Item[];
+
+type RootStackParamList = {
+  Tabs: undefined;
+  FullProduct: { id: number };
+};
+
+type NavigationProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;
+};

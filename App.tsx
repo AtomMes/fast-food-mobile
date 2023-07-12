@@ -1,21 +1,25 @@
 import React from "react";
-import BottomNavigation from "./components/navigation/BottomNavigation";
+import Navigation from "./components/navigation/Navigation";
 import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaView } from "react-native";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import { SafeAreaView, StyleSheet } from "react-native";
 
-
-function App() {
+const App = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container}>
       <Provider store={store}>
-        <NavigationContainer>
-          <BottomNavigation />
-        </NavigationContainer>
+        
+          <Navigation />
       </Provider>
-    </SafeAreaView> //flexi momenty dzem knopkeqi,(web em qashel dra hma), heto contenty qashely, redux, u tenc...
+    </SafeAreaView>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default App;

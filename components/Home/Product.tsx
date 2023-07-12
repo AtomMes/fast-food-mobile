@@ -7,8 +7,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import { Button } from "react-native-paper";
 import { addToCart } from "../../redux/itemsSlice";
+import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
+import { useNavigation } from "@react-navigation/native";
+type ProductScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "FullProduct"
+>;
+
 
 interface Props {
   item: Item;
@@ -16,6 +22,12 @@ interface Props {
 
 const Product = ({ item }: Props) => {
   const dispatch = useDispatch();
+
+  const navigation = useNavigation<ProductScreenNavigationProp>();
+
+  const handleProductPress = () => {
+    navigation.navigate("FullProduct", { id:item.id });
+  };
 
   return (
     <View
@@ -29,20 +41,27 @@ const Product = ({ item }: Props) => {
         borderStyle: "solid",
         borderRadius: 6,
         width: "48%",
-        minWidth:'46%',
+        minWidth: "46%",
         padding: 25,
         marginBottom: 16,
       }}
     >
-      <Image
-        source={{ uri: item.imageUrl }}
-        style={{ width: 110, height: 110, borderRadius: 15, marginBottom: 10 }}
-      />
+      <TouchableOpacity onPress={handleProductPress}>
+        <Image
+          source={{ uri: item.imageUrl }}
+          style={{
+            width: 110,
+            height: 110,
+            borderRadius: 15,
+            marginBottom: 10,
+          }}
+        />
+      </TouchableOpacity>
 
-      <Text style={{ textAlign: "center" }}>{item.name}a</Text>
-      <Text style={{ textAlign: "center" }}>$ {item.price}.00 USD</Text>
+      <Text style={{ textAlign: "center" }}>{item.name}</Text>
+      <Text style={{ textAlign: "center", marginBottom:8 }}>$ {item.price}.00 USD</Text>
 
-      <Text style={{ marginBottom: 8 }}>{item.description}</Text>
+      {/* <Text style={{ marginBottom: 8 }}>{item.description}</Text> */}
 
       <TouchableOpacity onPress={() => dispatch(addToCart(item.id))}>
         <View
@@ -51,8 +70,8 @@ const Product = ({ item }: Props) => {
             alignItems: "center",
             flexDirection: "row",
             backgroundColor: "#35b8be",
-            paddingHorizontal: 8,
-            height: 35,
+            paddingHorizontal: 10,
+            height: 30,
             borderRadius: 3,
           }}
         >

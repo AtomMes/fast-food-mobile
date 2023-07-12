@@ -1,17 +1,12 @@
 import React from "react";
-import { FlatList, ScrollView, View, Text, Image } from "react-native";
-import { useDispatch } from "react-redux";
-import { Button } from "react-native-paper";
-import { addToCart } from "../../redux/itemsSlice";
+import { FlatList, View } from "react-native";
 import Product from "./Product";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface Props {
   food: Items;
 }
 
 const Products = ({ food }: Props) => {
-
   const renderItem = ({ item }: { item: Item }) => <Product item={item} />;
 
   return (
