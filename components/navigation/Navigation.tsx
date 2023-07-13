@@ -71,8 +71,8 @@ function Navigation() {
             tabBarInactiveTintColor: "gray",
           })}
         >
-          <Tab.Screen name="Home" component={ScreenNavigation} />
           <Tab.Screen name="Cart" component={CartScreen} />
+          <Tab.Screen name="Home" component={ScreenNavigation} />
         </Tab.Navigator>
       </NavigationContainer>
     </>

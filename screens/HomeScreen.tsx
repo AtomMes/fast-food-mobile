@@ -4,16 +4,7 @@ import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen = () => {
-  return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: "center",
-      }}
-    >
-      <Home />
-    </SafeAreaView>
-  );
+  return <Home />;
 };
 
 export default HomeScreen;

@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <SafeAreaView
-      style={{ width: "100%", height: 70, backgroundColor: "white" }}
+      style={{ width: "100%", height: 90, backgroundColor: "white" }}
     >
       <View
         style={{

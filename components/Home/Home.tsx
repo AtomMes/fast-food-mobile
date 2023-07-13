@@ -68,16 +68,12 @@ const Home = () => {
     }
   }, [items]);
 
- 
-
   return (
-    <View style={{ flex: 1, alignItems: "center", paddingHorizontal:10 }}>
+    <View style={{ paddingHorizontal: 10, paddingTop: 15 }}>
       <ScrollView>
-
-      <Buttons buttons={buttons} handleClick={handleClick} />
-      <Products food={food} />
+        <Buttons buttons={buttons} handleClick={handleClick} />
+        <Products food={food} />
       </ScrollView>
-    
     </View>
   );
 };

@@ -8,11 +8,7 @@ interface Props {
 
 const Buttons = ({ buttons, handleClick }: Props) => {
   return (
-    <View
-      style={{
-        padding: 15,
-      }}
-    >
+    <View style={{ marginBottom: 15 }}>
       <View
         style={{
           display: "flex",

@@ -44,14 +44,12 @@ const FullProduct = ({ route }: Props) => {
   const navigation = useNavigation<ProductScreenNavigationProp>();
 
   return (
-    <SafeAreaView style={{ flex: 1, width: "100%" }}>
       <ScrollView>
         <View
           style={{
             display: "flex",
             alignSelf: "center",
             width: "100%",
-            marginBottom: 20,
             padding: 25,
           }}
         >
@@ -106,7 +104,7 @@ const FullProduct = ({ route }: Props) => {
 
           <TouchableOpacity
             onPress={() => dispatch(addToCart(item.id))}
-            style={{ marginTop: 35, alignSelf: "flex-start", marginBottom: 25 }}
+            style={{ marginTop: 35, alignSelf: "flex-start"}}
           >
             <View
               style={{
@@ -149,7 +147,7 @@ const FullProduct = ({ route }: Props) => {
               borderTopWidth: 0.5,
               fontSize: 40,
               fontWeight: "700",
-              paddingVertical: 30,
+              paddingVertical: 20,
             }}
           >
             Related Items
@@ -169,7 +167,6 @@ const FullProduct = ({ route }: Props) => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
   );
 };
 
