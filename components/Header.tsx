@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <SafeAreaView
-      style={{ width: "100%", zIndex:100, height: 90, backgroundColor: "white" }}
+      style={{ width: "100%", zIndex:100, height: 90, backgroundColor: "#35b8be" }}
     >
       <View
         style={{
@@ -35,7 +35,7 @@ const Header = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("About")}>
 
-          <Icon name="info-circle" size={25} color="gray" />
+          <Icon name="info-circle" size={25} color="white" />
           </TouchableOpacity>
 
       </View>
