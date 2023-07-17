@@ -15,7 +15,6 @@ type ProductScreenNavigationProp = StackNavigationProp<
   "FullProduct"
 >;
 
-
 interface Props {
   item: Item;
 }
@@ -26,7 +25,7 @@ const Product = ({ item }: Props) => {
   const navigation = useNavigation<ProductScreenNavigationProp>();
 
   const handleProductPress = () => {
-    navigation.navigate("FullProduct", { id:item.id });
+    navigation.navigate("FullProduct", { id: item.id });
   };
 
   return (
@@ -59,7 +58,9 @@ const Product = ({ item }: Props) => {
       </TouchableOpacity>
 
       <Text style={{ textAlign: "center" }}>{item.name}</Text>
-      <Text style={{ textAlign: "center", marginBottom:8 }}>$ {item.price}.00 USD</Text>
+      <Text style={{ textAlign: "center", marginBottom: 8 }}>
+        $ {item.price}.00 USD
+      </Text>
 
       {/* <Text style={{ marginBottom: 8 }}>{item.description}</Text> */}
 
@@ -75,7 +76,7 @@ const Product = ({ item }: Props) => {
             borderRadius: 3,
           }}
         >
-          {item.count && (
+          {item.count && item.count >= 1 ? (
             <View
               style={{
                 display: "flex",
@@ -90,7 +91,7 @@ const Product = ({ item }: Props) => {
             >
               <Text style={{ color: "#35b8be" }}>{item.count}</Text>
             </View>
-          )}
+          ) : null}
           <Text style={{ color: "white" }}>Add to cart</Text>
         </View>
       </TouchableOpacity>

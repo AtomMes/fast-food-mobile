@@ -27,7 +27,7 @@ interface Props {
 
 type ProductScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "Tabs"
+  "HomeScreen"
 >;
 const FullProduct = ({ route }: Props) => {
   const { id } = route.params;
@@ -61,7 +61,7 @@ const FullProduct = ({ route }: Props) => {
                 left: 5,
                 zIndex: 10,
               }}
-              onPress={() => navigation.navigate("Tabs")}
+              onPress={() => navigation.navigate("HomeScreen")}
             >
               <Icon name="arrow-left" size={20} color="#35b8be" />
             </TouchableOpacity>

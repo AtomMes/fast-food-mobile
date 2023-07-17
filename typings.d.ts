@@ -19,8 +19,10 @@ type Item = {
 type Items = Item[];
 
 type RootStackParamList = {
+  Home: undefined;
   Tabs: undefined;
   FullProduct: { id: number };
+  About: undefined;
 };
 
 type NavigationProps = {

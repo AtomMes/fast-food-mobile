@@ -4,15 +4,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const AboutUs = () => {
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: "center",
-        paddingBottom: 110,
-      }}
-    >
-      <Text>Hello world</Text>
-    </SafeAreaView>
+    <View>
+      <Text>Contact The Developer</Text>
+    </View>
   );
 };
 

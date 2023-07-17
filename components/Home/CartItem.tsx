@@ -13,6 +13,8 @@ const CartItem = ({ item }: Props) => {
 
    const dispatch = useAppDispatch()
 
+   if(!item) return <></>
+
   return (
     <View
       key={item.id}
