@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
+import * as MailComposer from "expo-mail-composer";
 
 const Container = styled.View`
   position: absolute;
@@ -53,25 +54,55 @@ const SendButtonText = styled.Text`
 `;
 
 const Form = () => {
+  const [name, setName] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
+  const handleSendEmail = () => {
+    if (name && message) {
+      const emailData = {
+        recipients: ["mesropyann.artem@gmail.com"],
+        subject: "Form Submission",
+        body: `Name: [${name}]\nMessage: [${message}]`,
+      };
+
+      MailComposer.composeAsync(emailData)
+        .then((result) => {
+          if (result.status === "sent") {
+            // Email sent successfully
+            console.log("Email sent");
+          } else {
+            // Failed to send email
+            console.log("Failed to send email");
+          }
+        })
+        .catch((error) => {
+          console.log("Error sending email:", error);
+        });
+    }else{
+      alert("Please fill all fields");
+    }
+  };
   return (
     <Container>
       <Title>Quick Contact</Title>
 
       <InputText>Name*</InputText>
-      <FormInput placeholder="Enter Your Name" />
-
-      <InputText>Email*</InputText>
-      <FormInput placeholder="Enter Email Address" />
-
+      <FormInput
+        placeholder="Enter Your Name"
+        value={name}
+        onChangeText={(text) => setName(text)}
+      />
       <InputText>Message*</InputText>
       <FormInput
         placeholder="You want to talk about..."
         style={{ height: 100 }}
         multiline={true}
+        value={message}
+        onChangeText={(text) => setMessage(text)}
         textAlignVertical="top"
       />
 
-      <SendButton>
+      <SendButton onPress={handleSendEmail}>
         <SendButtonText>Send</SendButtonText>
       </SendButton>
     </Container>

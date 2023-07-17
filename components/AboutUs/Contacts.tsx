@@ -1,10 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, Linking } from "react-native";
 import React from "react";
 import { styled } from "styled-components/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const StyledWrapper = styled.View`
-margin-top:35px;
+  margin-top: 35px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -13,8 +13,7 @@ margin-top:35px;
   column-gap: 20px;
 `;
 
-const StyledContact = styled.View`
- 
+const StyledContact = styled.TouchableOpacity`
   width: 26%;
   background-color: #fff;
   border-radius: 12px;
@@ -25,9 +24,24 @@ const StyledContact = styled.View`
 `;
 
 const Contacts = () => {
+  const handleLinkedInPress = () => {
+    const linkedInURL = "https://www.linkedin.com/in/artem-mesropyan/";
+    Linking.openURL(linkedInURL);
+  };
+  const handleTgPress = () => {
+    const tgUrl = "https://t.me/attom1";
+    Linking.openURL(tgUrl);
+  };
+  const handleCvPress = () => {
+    const cvUrl = "https://bit.ly/Artem_Mesropyan_CV";
+    Linking.openURL(cvUrl);
+  };
   return (
     <StyledWrapper>
-      <StyledContact style={{ backgroundColor: "#0A66C2" }}>
+      <StyledContact
+        style={{ backgroundColor: "#0A66C2" }}
+        onPress={handleLinkedInPress}
+      >
         <Icon name="linkedin-square" size={50} color="#fff" />
 
         <Text
@@ -44,7 +58,10 @@ const Contacts = () => {
           LinkedIn
         </Text>
       </StyledContact>
-      <StyledContact style={{ backgroundColor: "#2197ff" }}>
+      <StyledContact
+        style={{ backgroundColor: "#2197ff" }}
+        onPress={handleTgPress}
+      >
         <Icon name="telegram" size={50} color="#fff" />
 
         <Text
@@ -61,7 +78,10 @@ const Contacts = () => {
           Telegram
         </Text>
       </StyledContact>
-      <StyledContact style={{ backgroundColor: "#fff" }}>
+      <StyledContact
+        style={{ backgroundColor: "#fff" }}
+        onPress={handleCvPress}
+      >
         <Icon name="file-pdf-o" size={50} color="#35b8be" />
         <Text
           style={{
@@ -77,7 +97,6 @@ const Contacts = () => {
           CV
         </Text>
       </StyledContact>
-      
     </StyledWrapper>
   );
 };
