@@ -9,15 +9,15 @@ import {
 } from "react-native";
 import React from "react";
 import { RouteProp } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 import { addToCart } from "../../redux/itemsSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Product from "./Product";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
+import RelatedItems from "./RelatedItems";
+import { styled } from "styled-components/native";
 
 type FullProductRouteProp = RouteProp<RootStackParamList, "FullProduct">;
 
@@ -29,6 +29,97 @@ type ProductScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "HomeScreen"
 >;
+
+const Wrapper = styled.View`
+  display: flex;
+  align-self: center;
+  width: 100%;
+  max-height: 70%;
+  padding: 25px;
+`;
+
+const Header = styled.View`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+const BackButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 10;
+`;
+
+const StyledImage = styled(Image)`
+  margin: 0 auto;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 250px;
+  max-height: 100%;
+  border-radius: 15px;
+  margin-bottom: 10px;
+`;
+
+const Title = styled.Text`
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 5px;
+`;
+
+const Price = styled.Text`
+  color: #35b8be;
+  font-size: 20px;
+  font-weight: 500;
+  padding-bottom: 15px;
+  border-bottom-color: #35b8be;
+  border-bottom-width: 0.5px;
+`;
+
+const Description = styled.Text`
+  margin-top: 15px;
+  font-size: 16px;
+`;
+
+const AdditionalInfo = styled.Text`
+  margin: 5px 0;
+  font-size: 16px;
+`;
+
+const AddToCartButton = styled.TouchableOpacity`
+  margin-top: 35px;
+  align-self: flex-start;
+`;
+
+const AddToCartView = styled.View`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background-color: #35b8be;
+  padding: 0 10px;
+  height: 30px;
+  border-radius: 3px;
+`;
+
+const CountView = styled.View`
+  display: flex;
+  justify-content: center;
+  border-radius: 9999px;
+  margin-right: 5px;
+  align-items: center;
+  background-color: white;
+  width: 23px;
+  height: 23px;
+`;
+
+const CountText = styled.Text`
+  color: #35b8be;
+`;
+
+const AddToCartText = styled.Text`
+  color: white;
+`;
+
 const FullProduct = ({ route }: Props) => {
   const { id } = route.params;
   const dispatch = useAppDispatch();
@@ -43,130 +134,44 @@ const FullProduct = ({ route }: Props) => {
 
   const navigation = useNavigation<ProductScreenNavigationProp>();
 
+  if (!item) return <></>;
+
   return (
-      <ScrollView>
-        <View
-          style={{
-            display: "flex",
-            alignSelf: "center",
-            width: "100%",
-            padding: 25,
-          }}
-        >
-          <View style={{ position: "relative" }}>
-            <TouchableOpacity
-              style={{
-                position: "absolute",
-                top: 5,
-                left: 5,
-                zIndex: 10,
-              }}
-              onPress={() => navigation.navigate("HomeScreen")}
-            >
-              <Icon name="arrow-left" size={20} color="#35b8be" />
-            </TouchableOpacity>
-            <Image
-              source={{ uri: item.imageUrl }}
-              style={{
-                width: "100%",
-                height: 350,
-                borderRadius: 15,
-                marginBottom: 10,
-              }}
-            />
-          </View>
-          <Text style={{ fontSize: 30, fontWeight: "600", marginBottom: 5 }}>
-            {item.name}
-          </Text>
-          <Text
-            style={{
-              color: "#35b8be",
-              fontSize: 20,
-              fontWeight: "500",
-              paddingBottom: 15,
-              borderBottomColor: "#35b8be",
-              borderBottomWidth: 0.5,
-            }}
-          >
-            $ {item.price}.00 USD
-          </Text>
+    <ScrollView>
+      <Wrapper>
+        <Header>
+          <BackButton onPress={() => navigation.navigate("HomeScreen")}>
+            <Icon name="arrow-left" size={20} color="#35b8be" />
+          </BackButton>
+          <StyledImage source={{ uri: item.imageUrl }} />
+        </Header>
+        <Title>{item.name}</Title>
+        <Price>$ {item.price}.00 USD</Price>
 
-          <Text style={{ marginTop: 15, fontSize: 16 }}>
-            Alienum phaedrum torquatos nec eu, vis detraxit periculis ex, nihil
-            expetendis in mei. Mei an pericula euripidis, hinc partem ei est.;
-          </Text>
-          <Text style={{ marginVertical: 5, fontSize: 16 }}>
-            Eos ei nisl graecis, vix aperiri consequat an. Eius lorem tincidunt
-            vix at, vel pertinax sensibus id, error epicurei mea et. Mea
-            facilisis urbanitas. Vis ei rationibus definiebas, eu qui purto zril
-            laoreet. Ex error omnium interpretaris pro, alia illum ea vim.
-          </Text>
+        <Description>
+          Alienum phaedrum torquatos nec eu, vis detraxit periculis ex, nihil
+          expetendis in mei. Mei an pericula euripidis, hinc partem ei est.;
+        </Description>
+        <AdditionalInfo>
+          Eos ei nisl graecis, vix aperiri consequat an. Eius lorem tincidunt
+          vix at, vel pertinax sensibus id, error epicurei mea et. Mea facilisis
+          urbanitas. Vis ei rationibus definiebas, eu qui purto zril laoreet. Ex
+          error omnium interpretaris pro, alia illum ea vim.
+        </AdditionalInfo>
 
-          <TouchableOpacity
-            onPress={() => dispatch(addToCart(item.id))}
-            style={{ marginTop: 35, alignSelf: "flex-start"}}
-          >
-            <View
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "row",
-                backgroundColor: "#35b8be",
-                paddingHorizontal: 10,
-                height: 30,
-                borderRadius: 3,
-              }}
-            >
-              {item.count && (
-                <View
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    borderRadius: 9999,
-                    marginRight: 5,
-                    alignItems: "center",
-                    backgroundColor: "white",
-                    width: 23,
-                    height: 23,
-                  }}
-                >
-                  <Text style={{ color: "#35b8be" }}>{item.count}</Text>
-                </View>
-              )}
-              <Text style={{ color: "white" }}>Add to cart</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View style={{ padding: 25 }}>
-          <Text
-            style={{
-              textAlign: "center",
-              color: "#35b8be",
-              borderTopColor: "#35b8be",
-              borderTopWidth: 0.5,
-              fontSize: 40,
-              fontWeight: "700",
-              paddingVertical: 20,
-            }}
-          >
-            Related Items
-          </Text>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            {related.map((item) => (
-              <Product key={item.id} item={item} />
-            ))}
-          </View>
-        </View>
-      </ScrollView>
+        <AddToCartButton onPress={() => dispatch(addToCart(item.id))}>
+          <AddToCartView>
+            {item.count ? (
+              <CountView>
+                <CountText>{item.count}</CountText>
+              </CountView>
+            ) : null}
+            <AddToCartText>Add to cart</AddToCartText>
+          </AddToCartView>
+        </AddToCartButton>
+        <RelatedItems related={related} />
+      </Wrapper>
+    </ScrollView>
   );
 };
 

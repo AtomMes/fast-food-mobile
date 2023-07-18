@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../redux/redux-hooks";
-import Icon from "react-native-vector-icons/FontAwesome";
 import {
   addToCart,
   minusFromCart,
@@ -16,27 +15,63 @@ import {
 } from "../redux/itemsSlice";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
 import { useNavigation } from "@react-navigation/native";
-import CartItem from "../components/Home/CartItem";
-
+import CartItem from "../components/Cart/CartItem";
 import Spinner from "react-native-loading-spinner-overlay";
+import CartEmpty from "../components/Cart/CartEmpty";
+import { styled } from "styled-components/native";
 
 type ProductScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "Home"
+  "HomeScreen"
 >;
+
+const Container = styled.View`
+  flex: 1;
+  margin-top: 25px;
+`;
+
+const ItemsContainer = styled.View`
+  display: flex;
+  row-gap: 10px;
+  width: 100%;
+  flex: 1;
+  padding: 0 25px;
+`;
+
+const SubtotalContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 15px;
+`;
+
+const CheckoutButton = styled.TouchableOpacity`
+  width: 100%;
+`;
+
+const CheckoutButtonView = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #35b8be;
+  border-color: #35b8be;
+  border-radius: 5px;
+  height: 40px;
+`;
+
+const CheckoutInfo = styled.View`
+  padding: 15px 25px;
+  border-top-color: gray;
+  border-top-width: 0.5px;
+`;
 
 const CartScreen = () => {
   const { items } = useAppSelector((state) => state.itemsSlice);
-
   const [loading, setLoading] = React.useState<boolean>(false);
-
   const navigation = useNavigation<ProductScreenNavigationProp>();
-
   const cartItems = items.filter((item: Item) => item.count && item.count >= 1);
-
   const totalPrice = cartItems.reduce(
     (sum, obj: Item) => obj.price * obj.count! + sum,
     0
@@ -55,48 +90,18 @@ const CartScreen = () => {
   };
 
   const handlePress = () => {
-    cartItems.length ? checkout() : navigation.navigate("Home");
+    cartItems.length ? checkout() : navigation.navigate("HomeScreen");
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        marginTop: 25,
-      }}
-    >
-      <View
-        style={{
-          display: "flex",
-          rowGap: 10,
-          width: "100%",
-          flex: 1,
-          paddingHorizontal: 25,
-        }}
-      >
+    <Container>
+      <ItemsContainer>
         {cartItems.length ? (
           cartItems.map((item: Item) => <CartItem key={item.id} item={item} />)
         ) : (
-          <View
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <Text style={{ fontSize: 25, fontWeight: "600", color: "#757575" }}>
-              Cart Is Empty
-            </Text>
-            <Icon
-              name="cart-plus"
-              size={150}
-              color="#35b8be"
-              style={{ marginRight: 5 }}
-            />
-          </View>
+          <CartEmpty />
         )}
-      </View>
+      </ItemsContainer>
       <Spinner
         visible={loading}
         animation="fade"
@@ -104,42 +109,17 @@ const CartScreen = () => {
         textContent="Ordering"
         textStyle={{ color: "white" }}
       />
-      <View
-        style={{
-          paddingHorizontal: 25,
-          paddingVertical: 15,
-          borderTopColor: "gray",
-          borderTopWidth: 1,
-          borderStyle: "solid",
-        }}
-      >
+      <CheckoutInfo>
         {cartItems.length ? (
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginBottom: 15,
-            }}
-          >
+          <SubtotalContainer>
             <Text style={{ fontSize: 18 }}>Subtotal ({cartItems.length})</Text>
             <Text style={{ fontSize: 18 }}>${totalPrice}.00 USD</Text>
-          </View>
+          </SubtotalContainer>
         ) : (
           <></>
         )}
-        <TouchableOpacity onPress={handlePress} style={{ width: "100%" }}>
-          <View
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#35b8be",
-              borderColor: "#35b8be",
-              borderRadius: 5,
-              height: 40,
-            }}
-          >
+        <CheckoutButton onPress={handlePress}>
+          <CheckoutButtonView>
             <Text
               style={{
                 fontSize: 15,
@@ -148,10 +128,10 @@ const CartScreen = () => {
             >
               {cartItems.length ? "  Checkout" : "Go to the order page"}
             </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
+          </CheckoutButtonView>
+        </CheckoutButton>
+      </CheckoutInfo>
+    </Container>
   );
 };
 

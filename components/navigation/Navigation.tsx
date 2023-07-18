@@ -97,14 +97,14 @@ const TabNavigator = () => {
             <Icon
               name={iconName}
               size={size}
-              color={focused ? "#35b8be" : "gray"}
+              color={focused ? "#fff" : "#3a6b6e"}
             />
           );
         },
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "#35b8be",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveBackgroundColor:'#35b8be',
+        tabBarInactiveBackgroundColor:'#35b8be',
       })}
     >
       <Tab.Screen name="HomeScreen" component={HomeScreen} />

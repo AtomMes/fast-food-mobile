@@ -10,6 +10,72 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/itemsSlice";
 import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
 import { useNavigation } from "@react-navigation/native";
+import styled from "styled-components/native";
+
+const Container = styled.View`
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  border-color: rgba(53, 184, 190, 0.35);
+  border-width: 0.5px;
+  border-style: solid;
+  border-radius: 6px;
+  width: 48%;
+  min-width: 46%;
+  padding: 25px;
+  margin-bottom: 16px;
+`;
+
+const StyledImage = styled.Image`
+  width: 110px;
+  height: 110px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+`;
+
+const Title = styled.Text`
+  text-align: center;
+`;
+
+const Price = styled.Text`
+  text-align: center;
+  margin-bottom: 8px;
+`;
+
+const AddToCartButton = styled.TouchableOpacity`
+  margin-top: 5px;
+`;
+
+const AddToCartView = styled.View`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background-color: #35b8be;
+  padding: 0 10px;
+  height: 30px;
+  border-radius: 3px;
+`;
+
+const CountView = styled.View`
+  display: flex;
+  justify-content: center;
+  border-radius: 9999px;
+  margin-right: 5px;
+  align-items: center;
+  background-color: white;
+  width: 23px;
+  height: 23px;
+`;
+
+const CountText = styled.Text`
+  color: #35b8be;
+`;
+
+const AddToCartText = styled.Text`
+  color: white;
+`;
+
 type ProductScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "FullProduct"
@@ -29,73 +95,24 @@ const Product = ({ item }: Props) => {
   };
 
   return (
-    <View
-      style={{
-        display: "flex",
-        alignItems: "center",
-        alignSelf: "center",
-        justifyContent: "center",
-        borderColor: "rgba(53, 184, 190, 0.35)",
-        borderWidth: 0.5,
-        borderStyle: "solid",
-        borderRadius: 6,
-        width: "48%",
-        minWidth: "46%",
-        padding: 25,
-        marginBottom: 16,
-      }}
-    >
+    <Container>
       <TouchableOpacity onPress={handleProductPress}>
-        <Image
-          source={{ uri: item.imageUrl }}
-          style={{
-            width: 110,
-            height: 110,
-            borderRadius: 15,
-            marginBottom: 10,
-          }}
-        />
+        <StyledImage source={{ uri: item.imageUrl }} />
       </TouchableOpacity>
 
-      <Text style={{ textAlign: "center" }}>{item.name}</Text>
-      <Text style={{ textAlign: "center", marginBottom: 8 }}>
-        $ {item.price}.00 USD
-      </Text>
-
-      {/* <Text style={{ marginBottom: 8 }}>{item.description}</Text> */}
-
-      <TouchableOpacity onPress={() => dispatch(addToCart(item.id))}>
-        <View
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "row",
-            backgroundColor: "#35b8be",
-            paddingHorizontal: 10,
-            height: 30,
-            borderRadius: 3,
-          }}
-        >
+      <Title>{item.name}</Title>
+      <Price>$ {item.price}.00 USD</Price>
+      <AddToCartButton onPress={() => dispatch(addToCart(item.id))}>
+        <AddToCartView>
           {item.count && item.count >= 1 ? (
-            <View
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                borderRadius: 9999,
-                marginRight: 5,
-                alignItems: "center",
-                backgroundColor: "white",
-                width: 23,
-                height: 23,
-              }}
-            >
-              <Text style={{ color: "#35b8be" }}>{item.count}</Text>
-            </View>
+            <CountView>
+              <CountText>{item.count}</CountText>
+            </CountView>
           ) : null}
-          <Text style={{ color: "white" }}>Add to cart</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+          <AddToCartText>Add to cart</AddToCartText>
+        </AddToCartView>
+      </AddToCartButton>
+    </Container>
   );
 };
 
