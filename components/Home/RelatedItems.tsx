@@ -25,16 +25,20 @@ const RelatedWrapper = styled.View`
   justify-content: space-between;
 `;
 
+const Wrapper = styled.View`
+  padding: 25px 0;
+`;
+
 const RelatedItems = ({ related }: Props) => {
   return (
-    <View style={{ padding: 25 }}>
+    <Wrapper>
       <RelatedText>Related Items</RelatedText>
       <RelatedWrapper>
         {related.map((item) => (
           <Product key={item.id} item={item} />
         ))}
       </RelatedWrapper>
-    </View>
+    </Wrapper>
   );
 };
 
