@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
-import Form from "../components/AboutUs/Form";
 import Contacts from "../components/AboutUs/Contacts";
-import { Text } from "react-native";
-import { View } from "react-native";
+import Form from "../components/AboutUs/Form";
 
 const Container = styled.View`
   display: flex;
@@ -48,7 +46,7 @@ const AboutUs = () => {
       <Line />
 
       <CoverLetter>
-        Hello. My name is Artem Mesropyan, I'm a front-end developer seeking new
+        Hello. My name is Artem Mesropyan, I'm a front-end developer seeking job
         opportunities. Please reach out. Thanks!
       </CoverLetter>
 

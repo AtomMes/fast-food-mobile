@@ -1,7 +1,7 @@
 import React from "react";
-import { FlatList, View } from "react-native";
-import Product from "./Product";
+import { View } from "react-native";
 import { styled } from "styled-components/native";
+import Product from "./Product";
 
 interface Props {
   food: Items;

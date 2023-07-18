@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useAppDispatch } from "../../redux/redux-hooks";
+import styled from "styled-components/native";
 import {
   addToCart,
   minusFromCart,
   removeFromCart,
 } from "../../redux/itemsSlice";
-import styled from "styled-components/native";
+import { useAppDispatch } from "../../redux/redux-hooks";
 
 const Container = styled.View`
   display: flex;

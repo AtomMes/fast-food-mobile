@@ -1,5 +1,5 @@
-import { RouteProp, useNavigation } from "@react-navigation/native";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";

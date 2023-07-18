@@ -1,7 +1,6 @@
-import { View, Text } from "react-native";
 import React from "react";
-import Product from "./Product";
 import { styled } from "styled-components/native";
+import Product from "./Product";
 
 interface Props {
   related: Items;

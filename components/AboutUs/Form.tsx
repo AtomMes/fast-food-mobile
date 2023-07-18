@@ -1,6 +1,6 @@
+import * as MailComposer from "expo-mail-composer";
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import * as MailComposer from "expo-mail-composer";
 
 const Container = styled.View`
   position: absolute;

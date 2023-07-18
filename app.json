@@ -1,19 +1,18 @@
 {
   "expo": {
-    "name": "fast-food-mobile",
+    "name": "Fast Food Mobile",
+    "description": "Takeaway & Delivery template for small - medium businesses.",
     "slug": "fast-food-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/squareLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/loading.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

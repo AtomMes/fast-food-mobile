@@ -1,16 +1,12 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
-  ImageBackground,
-  Image,
-  Text,
-  View,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/itemsSlice";
 import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
-import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 import styled from "styled-components/native";
+import { addToCart } from "../../redux/itemsSlice";
 
 const Container = styled.View`
   display: flex;

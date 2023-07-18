@@ -1,26 +1,19 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-} from "react-native";
-import React from "react";
-import { useAppDispatch, useAppSelector } from "../redux/redux-hooks";
-import {
-  addToCart,
-  minusFromCart,
-  removeFromCart,
-  setItems,
-} from "../redux/itemsSlice";
-import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
 import { useNavigation } from "@react-navigation/native";
-import CartItem from "../components/Cart/CartItem";
+import axios from "axios";
+import React from "react";
+import {
+  Text
+} from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import CartEmpty from "../components/Cart/CartEmpty";
+import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
 import { styled } from "styled-components/native";
+import CartEmpty from "../components/Cart/CartEmpty";
+import CartItem from "../components/Cart/CartItem";
+import {
+  setItems
+} from "../redux/itemsSlice";
+import { useAppDispatch, useAppSelector } from "../redux/redux-hooks";
 
 type ProductScreenNavigationProp = StackNavigationProp<
   RootStackParamList,

@@ -1,23 +1,16 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-  TouchableHighlight,
-} from "react-native";
-import React from "react";
-import { RouteProp } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
-import { addToCart } from "../../redux/itemsSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Product from "./Product";
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation } from "@react-navigation/native";
+import React from "react";
+import {
+  Image,
+  ScrollView
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types";
-import RelatedItems from "./RelatedItems";
 import { styled } from "styled-components/native";
+import { addToCart } from "../../redux/itemsSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
+import RelatedItems from "./RelatedItems";
 
 type FullProductRouteProp = RouteProp<RootStackParamList, "FullProduct">;
 
